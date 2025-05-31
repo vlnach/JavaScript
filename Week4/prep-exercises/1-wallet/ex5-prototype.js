@@ -1,4 +1,4 @@
-import eurosFormatter from './euroFormatter.js';
+import eurosFormatter from "./euroFormatter.js";
 
 function Wallet(name, cash) {
   this._name = name;
@@ -26,7 +26,9 @@ Wallet.prototype.transferInto = function (wallet, amount) {
     } to ${wallet.getName()}`
   );
   const withdrawnAmount = this.withdraw(amount);
-  wallet.deposit(withdrawnAmount);
+  if (withdrawnAmount > 0) {
+    wallet.deposit(withdrawnAmount);
+  }
 };
 
 Wallet.prototype.reportBalance = function () {
@@ -40,9 +42,9 @@ Wallet.prototype.getName = function () {
 };
 
 function main() {
-  const walletJack = new Wallet('Jack', 100);
-  const walletJoe = new Wallet('Joe', 10);
-  const walletJane = new Wallet('Jane', 20);
+  const walletJack = new Wallet("Jack", 100);
+  const walletJoe = new Wallet("Joe", 10);
+  const walletJane = new Wallet("Jane", 20);
 
   walletJack.transferInto(walletJoe, 50);
   walletJane.transferInto(walletJoe, 25);
